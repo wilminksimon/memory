@@ -1,0 +1,9 @@
+@use '../abstract/mixin';
+@use '../abstract/variables';
+
+.home-screem {
+    @include mixins.flex-center;
+
+    background-color: variables.$primary-dark;
+    color: variables.$text-color;
+}
