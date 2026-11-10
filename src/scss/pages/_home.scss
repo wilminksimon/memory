@@ -1,9 +1,20 @@
 @use '../abstract/mixin';
 @use '../abstract/variables';
 
-.home-screem {
-    @include mixins.flex-center;
-
+.home-screen {
+    @include mixin.flex-center;
+    min-height: 100vh;
     background-color: variables.$primary-dark;
     color: variables.$text-color;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+
+    &__background {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        pointer-events: none;
+    }
+
 }
