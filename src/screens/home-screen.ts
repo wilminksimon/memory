@@ -18,3 +18,9 @@ export function renderHomeScreen(): string {
         </main>
 `;
 }
+
+export function initHomeScreen(onPlay: () => void): void {
+    const playButton = document.querySelector<HTMLButtonElement>('.button--play');
+
+    playButton?.addEventListener('click', onPlay);
+}

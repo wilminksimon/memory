@@ -1,0 +1,1 @@
+export type Theme = | 'code-vibes' | 'games' | 'da-projects' | 'food';
