@@ -1,0 +1,47 @@
+//Font Faces
+
+@font-face {
+    font-family: 'Almarai';
+    src: url('src/assets/fonts/Almarai-Regular.ttf') format('ttf');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'RedRose';
+    src: url('src/assets/fonts/RedRose-VariableFont_wght.ttf') format('ttf');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+//Font Families
+
+$font-family: 'Almarai', Arial, sans-serif;
+$heading-font-family: 'RedRose', Arial, sans-serif;
+
+
+//Global Typography
+
+body {
+    font-family: $font-family;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: $heading-font-family;
+}
+
+$sizes: (
+    s: 8px,
+    m: 16px,
+    l: 24px,
+    xl: 48px,
+    xxl: 140px,
+);
+
+@each $name, $size in $sizes {
+    .text-#{$name} {
+        font-size: $size;
+    }
+}
