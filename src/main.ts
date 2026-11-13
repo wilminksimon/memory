@@ -1,7 +1,10 @@
 import './scss/main.scss';
 import { themePreviews } from './data/themes';
-import { renderHomeScreen, initHomeScreen } from './screens/home-screen';
-import { renderSettingsScreen } from './screens/setting-screen';
+import { renderHomeScreen, initHomeScreen } from './screens/home/home-screen';
+import { renderSettingsScreen } from './screens/settings/setting-screen';
+import { gameSettings } from './data/game-settings';
+import type { Theme } from './types/theme-types';
+import type { Player } from './types/player-types';
 
 type Screen = 'home' | 'settings';
 
@@ -33,20 +36,29 @@ renderApp();
 
 
 function initSettingsScreen(): void {
+    const settingsOptions = app?.querySelector('.settings-screen__options');
+    settingsOptions?.addEventListener('change', handleSettingsChange);
+}
 
-    const themeInputs = app?.querySelectorAll<HTMLInputElement>('input[name="theme"]');
+function handleSettingsChange(event: Event): void {
+    const selectedInput = event.target as HTMLInputElement;
 
+    if (selectedInput.name === 'theme') {
+        updateSelectedTheme(selectedInput.value as Theme);
+    }
+}
+
+function updateSelectedTheme(theme: Theme): void {
+    gameSettings.theme = theme;
+    updateThemePreview(theme);
+}
+
+function updateThemePreview(theme: Theme): void {
     const previewImage = app?.querySelector<HTMLImageElement>(
         '.settings-screen__preview-image'
     );
 
-    themeInputs?.forEach((themeInput) => {
-        themeInput.addEventListener('change', () => {
-            if (!previewImage) return;
-            const selectedTheme = themeInput.value as keyof typeof themePreviews;
-            previewImage.src = themePreviews[selectedTheme];
-
-        });
-
-    });
+    if (previewImage) {
+        previewImage.src = themePreviews[theme];
+    }
 }

@@ -1,5 +1,5 @@
 import codeVibesPreview from '../assets/theme-previews/code-vibes.svg'
-import { themePreviews } from '../data/themes';
+import { themePreviews } from '../../data/themes';
 
 export function renderSettingsScreen(): string {
     return `
