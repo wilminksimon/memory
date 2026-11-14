@@ -1,0 +1,35 @@
+@use '../abstract/variables';
+@use '../abstract/mixin';
+
+.settings-screen {
+
+    &__container {
+        @include mixin.flex-column(40px);
+
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    &__content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    &__options {
+        @include mixin.flex-column(30px);
+    }
+
+    &__group {
+        @include mixin.flex-column(15px);
+    }
+
+    &__choices {
+        @include mixin.flex-column(12px);
+    }
+
+    &__preview {
+        @include mixin.flex-center;
+    }
+}
