@@ -39,6 +39,21 @@
     &__preview {
         @include mixin.flex-center;
     }
+
+        &__choice {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        input:checked + span {
+            font-weight: 700;
+        }
+    }
+
+    &__choice-line {
+        width: 41px;
+        height: auto;
+    }
 }
 
 h2 {
