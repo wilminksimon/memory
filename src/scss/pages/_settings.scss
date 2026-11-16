@@ -3,8 +3,11 @@
 
 .settings-screen {
 
+    min-height: 100vh;
+    @include mixin.flex-between;
+
     &__container {
-        @include mixin.flex-column(40px);
+        @include mixin.flex-column(64px);
 
         max-width: 1200px;
         margin: 0 auto;
