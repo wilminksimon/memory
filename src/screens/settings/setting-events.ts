@@ -13,16 +13,17 @@ const themeLabels: Record<Theme, string> = {
     food: 'Food'
 };
 
-export function initSettingsEvents(app: HTMLDivElement): void {
+export function initSettingsEvents(app: HTMLDivElement, onStartGame: () => void
+): void {
     const options = app.querySelector('.settings-screen__options');
     const lines = createChoiceLines();
-
     options?.addEventListener('change', event => {
         handleSettingsChange(event, app, lines);
     });
-
     initChoiceLines(app, lines);
     updateSettingsSummary(app);
+    const startButton = app.querySelector<HTMLButtonElement>('.button--startGame');
+    startButton?.addEventListener('click', onStartGame);
 }
 
 function handleSettingsChange(event: Event, app: HTMLDivElement, lines: ChoiceLines): void {
