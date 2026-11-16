@@ -1,5 +1,11 @@
-import codeVibesPreview from '../assets/theme-previews/code-vibes.svg'
 import { themePreviews } from '../../data/themes';
+import paletteIcon from '../../assets/logos/palette.png';
+import playerIcon from '../../assets/logos/chess_pawn.png';
+import sizeIcon from '../../assets/logos/style.png';
+import headerLine from '../../assets/logos/Line 3.png';
+import space from '../../assets/logos/space.png';
+import startButton from '../../assets/logos/smart_display.png';
+
 
 export function renderSettingsScreen(): string {
     return `
@@ -9,7 +15,7 @@ export function renderSettingsScreen(): string {
 
         <header class="settings-screen__header">
             <h1 class="header-settings text-54">Settings</h1>
-            <img src="src/assets/logos/Line 3.png" alt="Line">
+            <img src="${headerLine}" alt="Line">
         </header>
 
         <div class="settings-screen__content">
@@ -17,7 +23,7 @@ export function renderSettingsScreen(): string {
             <section class="settings-screen__options">
                 <div class="settings-screen__group">
 
-                    <h2><img src="src/assets/logos/palette.png" alt="Themes">Game themes</h2>
+                    <h2><img src="${paletteIcon}" alt="Themes">Game themes</h2>
                     <div class="settings-screen__choices">
                         <label class="settings-screen__choice">
                             <input type="radio" name="theme" value="code-vibes" checked>
@@ -42,7 +48,7 @@ export function renderSettingsScreen(): string {
                 </div>
 
                 <div class="settings-screen__group">
-                    <h2><img src="src/assets/logos/chess_pawn.png" alt="Player">Choose player</h2>
+                    <h2><img src="${playerIcon}" alt="Player">Choose player</h2>
                     <div class="settings-screen__choices">
                         <label class="settings-screen__choice">
                             <input type="radio" name="player" value="blue" checked>
@@ -57,7 +63,7 @@ export function renderSettingsScreen(): string {
                 </div>
 
                 <div class="settings-screen__group">
-                    <h2><img src="src/assets/logos/style.png" alt="Size">Board size</h2>
+                    <h2><img src="${sizeIcon}" alt="Size">Board size</h2>
 
                     <div class="settings-screen__choices">
                         <label class="settings-screen__choice">
@@ -77,13 +83,26 @@ export function renderSettingsScreen(): string {
                     </div>
                 </div>
             </section>
-            <div class="setting-screen__preview__footer>
+
+            <div class="settings-screen__preview-area">
                 <aside class="settings-screen__preview">
                     <img class="settings-screen__preview-image" src="${themePreviews['code-vibes']}" alt="Code Vibes Theme Preview">
                 </aside>
+
                 <footer class="settings-screen__footer">
-                    <!-- summary and start button -->
+                    <div class="settings-screen__summary">
+                        <p class="settings-screen__summary-theme">Code Vibes</p>
+                        <img src="${space}" alt="Space">
+                        <p class="settings-screen__summary-player">Blue</p>
+                        <img src="${space}" alt="Space">
+                        <p class="settings-screen__summary-board">16 Cards</p>
+                    </div>
+
+                    <button class="button button--startGame" type="button">
+                        <img src="${startButton}" alt="Space">Start
+                    </button>
                 </footer>
+
             </div>
         </div>
     </div>
