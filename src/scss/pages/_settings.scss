@@ -1,10 +1,12 @@
 @use '../abstract/variables';
 @use '../abstract/mixin';
+@use '../base/typography';
 
 .settings-screen {
 
     min-height: 100vh;
     @include mixin.flex-between;
+    
 
     &__container {
         @include mixin.flex-column(64px);
@@ -29,10 +31,22 @@
     }
 
     &__choices {
+        padding-left: 45px;
         @include mixin.flex-column(12px);
+        font-size: 20px;
     }
 
     &__preview {
         @include mixin.flex-center;
     }
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-settings {
+    margin-left: 22px;
 }

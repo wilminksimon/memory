@@ -8,7 +8,8 @@ export function renderSettingsScreen(): string {
     <div class="settings-screen__container">
 
         <header class="settings-screen__header">
-            <h1>Settings</h1>
+            <h1 class="header-settings text-54">Settings</h1>
+            <img src="src/assets/logos/Line 3.png" alt="Line">
         </header>
 
         <div class="settings-screen__content">
@@ -16,7 +17,7 @@ export function renderSettingsScreen(): string {
             <section class="settings-screen__options">
                 <div class="settings-screen__group">
 
-                    <h2>Game themes</h2>
+                    <h2><img src="src/assets/logos/palette.png" alt="Themes">Game themes</h2>
                     <div class="settings-screen__choices">
                         <label class="settings-screen__choice">
                             <input type="radio" name="theme" value="code-vibes" checked>
@@ -41,36 +42,39 @@ export function renderSettingsScreen(): string {
                 </div>
 
                 <div class="settings-screen__group">
-                    <h2>Choose player</h2>
+                    <h2><img src="src/assets/logos/chess_pawn.png" alt="Player">Choose player</h2>
+                    <div class="settings-screen__choices">
+                        <label class="settings-screen__choice">
+                            <input type="radio" name="player" value="blue" checked>
+                            <span>Blue</span>
+                        </label>
 
-                    <label class="settings-screen__choice">
-                        <input type="radio" name="player" value="blue" checked>
-                        <span>Blue</span>
-                    </label>
-
-                    <label class="settings-screen__choice">
-                        <input type="radio" name="player" value="orange">
-                        <span>Orange</span>
-                    </label>
+                        <label class="settings-screen__choice">
+                            <input type="radio" name="player" value="orange">
+                            <span>Orange</span>
+                        </label>
+                    </div>
                 </div>
 
                 <div class="settings-screen__group">
-                    <h2>Board size</h2>
+                    <h2><img src="src/assets/logos/style.png" alt="Size">Board size</h2>
 
-                    <label class="settings-screen__choice">
-                        <input type="radio" name="board-size" value="16" checked>
-                        <span>16 Cards</span>
-                    </label>
+                    <div class="settings-screen__choices">
+                        <label class="settings-screen__choice">
+                            <input type="radio" name="board-size" value="16" checked>
+                            <span>16 Cards</span>
+                        </label>
 
-                    <label class="settings-screen__choice">
-                        <input type="radio" name="board-size" value="24">
-                        <span>24 Cards</span>
-                    </label>
+                        <label class="settings-screen__choice">
+                            <input type="radio" name="board-size" value="24">
+                            <span>24 Cards</span>
+                        </label>
 
-                    <label class="settings-screen__choice">
-                        <input type="radio" name="board-size" value="36">
-                        <span>36 Cards</span>
-                    </label>
+                        <label class="settings-screen__choice">
+                            <input type="radio" name="board-size" value="36">
+                            <span>36 Cards</span>
+                        </label>
+                    </div>
                 </div>
             </section>
             <div class="setting-screen__preview__footer>

@@ -2,8 +2,8 @@ export function renderHomeScreen(): string {
     return `
         <main class="home-screen">
         <div>
-            <aside class="text-xl">It’s play time.</aside>
-            <h1 class="text-xxl">Ready to play?</h1>
+            <aside class="text-48">It’s play time.</aside>
+            <h1 class="text-140">Ready to play?</h1>
         </div>
             <button class="button button--play">
                 <img class="button__controller" src="src/assets/logos/controller.png" alt="Controller">
