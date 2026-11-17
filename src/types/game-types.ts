@@ -14,3 +14,8 @@ export interface MemoryCard {
     pairId: number;
     image: string;
 }
+
+export interface GameState {
+    currentPlayer: Player;
+    scores: Record<Player, number>;
+}
