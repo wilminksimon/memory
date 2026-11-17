@@ -1,4 +1,35 @@
+import { createGameCards } from '../../game-logic/game';
+import { gameSettings } from '../../data/game-settings';
+import { cardBacks } from '../../data/cards';
+
 export function renderGameScreen(): string {
+
+        const cards = createGameCards();
+    const cardBack = cardBacks[gameSettings.theme];
+    const boardSize = gameSettings.boardSize;
+
+    const columns = boardSize === 16 ? 4 : 6;
+
+    const cardsHTML = cards.map(card => `
+        <button class="card" type="button"
+            data-card-id="${card.id}"
+            data-pair-id="${card.pairId}">
+
+            <div class="card__inner">
+
+                <div class="card__face">
+                    <img src="${cardBack}" alt="">
+                </div>
+
+                <div class="card__face card__face--back">
+                    <img src="${card.image}" alt="">
+                </div>
+
+            </div>
+
+        </button>
+    `).join('');
+
     return `
         <main class="game-screen">
             <div class="game-screen__container">
@@ -28,8 +59,8 @@ export function renderGameScreen(): string {
 
                 </header>
 
-                <section id="field" class="game-screen__board">
-                    <!-- Memory Cards -->
+                <section id="field" class="game-screen__board" style="grid-template-columns: repeat(${columns}, 1fr)">
+                    ${cardsHTML}
                 </section>
 
             </div>
