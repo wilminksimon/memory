@@ -31,7 +31,7 @@ export function renderGameScreen(): string {
     `).join('');
 
     return `
-        <main class="game-screen">
+        <main class="game-screen" data-theme="${gameSettings.theme}">
             <div class="game-screen__container">
 
                 <header class="game-screen__header">
