@@ -3,6 +3,7 @@ import { renderHomeScreen, initHomeScreen } from './screens/home/home-screen';
 import { renderSettingsScreen } from './screens/settings/setting-screen';
 import { initSettingsEvents } from './screens/settings/setting-events';
 import { renderGameScreen } from './screens/game/game-screen';
+import { initGameEvents } from './screens/game/game-events';
 
 type Screen = 'home' | 'settings' | 'game';
 
@@ -31,6 +32,7 @@ function renderSettings(app: HTMLDivElement): void {
 
 function renderGame(app: HTMLDivElement): void {
     app.innerHTML = renderGameScreen();
+    initGameEvents(app);
 }
 
 function changeScreen(screen: Screen): void {
