@@ -4,3 +4,73 @@ $secondary-yellow: #F0EA6E;
 
 $border-radius: 12px;
 
+// Player Colors
+$player-blue: #29b9f6;
+$player-orange: #f28b3a;
+
+
+// Game Themes
+
+$game-themes: (
+
+    'code-vibes': (
+        game-bg: #303131,
+        header-bg: transparent,
+        header-text: #ffffff,
+        scoreboard-bg: #405b52,
+        card-face-bg: #e8f3ef,
+        exit-bg: #354f49,
+        exit-border: #4dd6c3,
+        exit-text: #ffffff,
+        popup-bg: #ffffff,
+        popup-text: #303131,
+        popup-primary: #57cbb4,
+        popup-secondary: #57cbb4
+    ),
+
+    'games': (
+        game-bg: #294f60,
+        header-bg: #535d75,
+        header-text: #ffffff,
+        scoreboard-bg: #ffffff,
+        card-face-bg: #eef2f7,
+        exit-bg: transparent,
+        exit-border: #ed2780,
+        exit-text: #ed2780,
+        popup-bg: #eff4f7,
+        popup-text: #294f60,
+        popup-primary: #ed2780,
+        popup-secondary: #ed2780
+    ),
+
+    'da-projects': (
+        game-bg: #ffffff,
+        header-bg: #f0f3f4,
+        header-text: #1e7594,
+        scoreboard-bg: #ffffff,
+        card-face-bg: #edf4f6,
+        exit-bg: #bce8f4,
+        exit-border: #bce8f4,
+        exit-text: #1e7594,
+        popup-bg: #eaf3f7,
+        popup-text: #28546a,
+        popup-primary: #bce8f4,
+        popup-secondary: #ff8178
+    ),
+
+    'food': (
+        game-bg: #ffffff,
+        header-bg: #f0e5d9,
+        header-text: #ad642b,
+        scoreboard-bg: #ffffff,
+        card-face-bg: #fff2e5,
+        exit-bg: #ffffff,
+        exit-border: #f3832d,
+        exit-text: #d36f24,
+        popup-bg: #fff6ed,
+        popup-text: #ad642b,
+        popup-primary: #f5a33d,
+        popup-secondary: #f3832d
+    )
+
+);

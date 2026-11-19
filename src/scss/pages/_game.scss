@@ -1,9 +1,28 @@
 @use '../abstract/variables';
+@use 'sass:map';
+@use '../abstract/mixin';
+
+@each $theme, $settings in variables.$game-themes {
+    .game-screen[data-theme="#{$theme}"] {
+        --game-bg: #{map.get($settings, game-bg)};
+        --header-bg: #{map.get($settings, header-bg)};
+        --header-text: #{map.get($settings, header-text)};
+        --scoreboard-bg: #{map.get($settings, scoreboard-bg)};
+        --card-face-bg: #{map.get($settings, card-face-bg)};
+        --exit-bg: #{map.get($settings, exit-bg)};
+        --exit-border: #{map.get($settings, exit-border)};
+        --exit-text: #{map.get($settings, exit-text)};
+        --popup-bg: #{map.get($settings, popup-bg)};
+        --popup-text: #{map.get($settings, popup-text)};
+        --popup-primary: #{map.get($settings, popup-primary)};
+        --popup-secondary: #{map.get($settings, popup-secondary)};
+    }
+}
 
 .game-screen {
 
     min-height: 100vh;
-    background-color: variables.$primary-dark;
+    background-color: var(--game-bg);
     padding: 20px;
 
     &__board {
@@ -12,6 +31,8 @@
         width: max-content;
         margin: 55px auto;
         gap: 16px;
+        background-color: transparent;
+        color: var(--header-text);
     }
 
     &__header {
@@ -20,14 +41,16 @@
         align-items: center;
         max-width: 1210px;
         margin: 0 auto;
+        background-color: var(--header-bg);
+        color: var(--header-text);
     }
 
     &__scoreboard {
         display: flex;
         gap: 12px;
-        background-color: #3d5952;
         padding: 12px 20px;
         width: max-content;
+        background-color: var(--scoreboard-bg);
     }
 
     &__score {
@@ -38,11 +61,11 @@
         font-size: 18px;
 
         &--blue {
-            color: #29b9f6;
+            color: variables.$player-blue;
         }
 
         &--orange {
-            color: #f28b3a;
+            color: variables.$player-orange;
         }
     }
 
@@ -52,7 +75,7 @@
         align-items: center;
         gap: 8px;
         font-size: 20px;
-        color: white;
+        color: var(--header-text);
     }
 
     &__player-indicator {
