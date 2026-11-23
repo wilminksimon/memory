@@ -41,6 +41,11 @@
         &[data-board-size="16"] {
             gap: 16px;
         }
+
+        &[data-board-size="36"] .card {
+        width: 100px;
+        height: 100px;
+    }
     }
 
     &__header {
@@ -221,5 +226,12 @@
         border: 1px solid var(--popup-secondary);
         color: var(--popup-secondary);
         width: 148px;
+    }
+}
+
+@media (max-width: 1366px) {
+    .game-screen__board[data-board-size="36"] .card {
+        width: 82px;
+        height: 82px;
     }
 }
