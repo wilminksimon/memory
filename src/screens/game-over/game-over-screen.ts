@@ -71,7 +71,7 @@ export function renderWinnerScreen(game: GameState): string {
                     alt="${winnerName}"
                 >
 
-                <button class="button button--game-over">
+                <button class="button button--exit button--game-over">
                     Back to start
                 </button>
             </section>

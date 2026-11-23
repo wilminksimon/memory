@@ -1,0 +1,61 @@
+// Game Screen
+.game-screen[data-theme="games"] {
+    --game-bg: #294f60;
+    --header-bg: #FD96C933;
+    --header-text: #ffffff;
+    --scoreboard-bg: #ffffff;
+    --card-face-bg: #eef2f7;
+    --card-width: 105px;
+    --card-aspect-ratio: 0.875;
+    --card-width-36: 87.5px;
+    --card-width-compact: 71.75px;
+    --popup-bg: #eff4f7;
+    --popup-text: #294f60;
+    --popup-primary: #ed2780;
+    --popup-secondary: #ed2780;
+}
+
+// Gemeinsame Exit-Button-Variablen
+.game-screen[data-theme="games"],
+.game-over-screen--winner[data-theme="games"] {
+    --exit-bg: rgba(237, 27, 118, 0.08);
+    --exit-hover-bg: rgba(237, 27, 118, 0.14);
+    --exit-icon: #E71C4F;
+    --exit-radius: 10px;
+    --exit-border: 2px solid #ed2780;
+    --exit-text: #ffffff;
+    --exit-hover-text: #ffffff;
+}
+
+// Gemeinsame Game Over Einstellungen
+.game-over-screen[data-theme="games"] {
+    --game-over-bg: #294f60;
+    --game-over-subtitle: #ffffff;
+    --game-over-image-bg: transparent;
+}
+
+// Score Screen
+.game-over-screen--score[data-theme="games"] {
+    --game-over-title: #ff087d;
+    --game-over-score-bg: #ffffff;
+    --game-over-score-label: #ffffff;
+
+    .game-over-screen__title {
+        letter-spacing: 4px;
+    }
+}
+
+// Winner Screen
+.game-over-screen--winner[data-theme="games"] {
+    &[data-winner="blue"] {
+        --game-over-result: #29b9f6;
+    }
+
+    &[data-winner="orange"] {
+        --game-over-result: #f58e39;
+    }
+
+    &[data-winner="draw"] {
+        --game-over-result: #ed2780;
+    }
+}

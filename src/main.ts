@@ -4,7 +4,7 @@ import { renderSettingsScreen } from './screens/settings/setting-screen';
 import { initSettingsEvents } from './screens/settings/setting-events';
 import { renderGameScreen } from './screens/game/game-screen';
 import { initGameEvents } from './screens/game/game-events';
-import {renderScoreScreen, renderWinnerScreen} from './screens/game-over/game-over-screen';
+import { renderScoreScreen, renderWinnerScreen } from './screens/game-over/game-over-screen';
 import { initGameOverEvents } from './screens/game-over/game-over-events';
 import type { GameState } from './types/game-types';
 import { gameSettings } from './data/game-settings';
@@ -67,7 +67,7 @@ function renderGameOver(app: HTMLDivElement): void {
         if (currentScreen !== 'gameOver') return;
 
         app.innerHTML = renderWinnerScreen(game);
-        initGameOverEvents(app, () => changeScreen('settings'));
+        initGameOverEvents(app, () => changeScreen('home'));
     }, 9000);
 }
 
@@ -89,7 +89,7 @@ function previewWinnerScreen(theme: Theme, winner: 'blue' | 'orange' | 'draw'): 
         : winner === 'blue' ? { blue: 6, orange: 2 } : { blue: 2, orange: 6 };
     const game: GameState = { currentPlayer: 'blue', scores };
     app.innerHTML = renderWinnerScreen(game);
-    initGameOverEvents(app, () => changeScreen('settings'));
+    initGameOverEvents(app, () => changeScreen('home'));
 }
 
 if (import.meta.env.DEV) {

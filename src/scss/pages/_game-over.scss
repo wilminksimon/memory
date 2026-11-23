@@ -62,10 +62,6 @@
     .button--game-over {
         min-width: 180px;
         padding: 14px 18px;
-        border: none;
-        border-radius: 3px;
-        background-color: var(--game-over-button-bg);
-        color: var(--game-over-button-text);
         font-family: 'Almarai', sans-serif;
         font-size: 14px;
         font-weight: 700;
@@ -73,6 +69,7 @@
     }
 }
 
+// Score Screen
 .game-over-screen--score {
     --game-over-title: #4dd6c3;
     --game-over-score-bg: #405b52;
@@ -128,45 +125,7 @@
     }
 }
 
-// Code Vibes
-.game-over-screen--score[data-theme="code-vibes"] {
-    --game-over-title: #4dd6c3;
-    --game-over-score-bg: #405b52;
-}
-
-// Games
-.game-over-screen--score[data-theme="games"] {
-    --game-over-bg: #294f60;
-    --game-over-title: #ff087d;
-    --game-over-score-bg: #ffffff;
-    --game-over-score-label: #ffffff;
-
-    .game-over-screen__title {
-        letter-spacing: 4px;
-    }
-}
-
-// DA Projects
-.game-over-screen--score[data-theme="da-projects"] {
-    --game-over-bg: #207c99;
-    --game-over-title: #ff6758;
-    --game-over-score-bg: #ffffff;
-    --game-over-score-label: #ffffff;
-}
-
-// Food
-.game-over-screen--score[data-theme="food"] {
-    --game-over-bg: #f58220;
-    --game-over-title: #ffffff;
-    --game-over-score-bg: #ffffff;
-    --game-over-score-label: #fff4e9;
-
-    .game-over-screen__title {
-        font-weight: 400;
-        letter-spacing: 1px;
-    }
-}
-
+// Winner Screen
 .game-over-screen--winner {
     .game-over-screen__content {
         gap: 12px;
@@ -175,7 +134,7 @@
     .game-over-screen__illustration {
         width: 200px;
         height: 200px;
-        margin: 4px 0;
+        margin: 64px;
     }
 
     .game-over-screen__confetti {
@@ -188,80 +147,5 @@
         min-width: 120px;
         padding: 10px 16px;
         font-size: 13px;
-    }
-}
-
-// Code Vibes
-.game-over-screen--winner[data-theme="code-vibes"] {
-    --game-over-bg: #303131;
-    --game-over-subtitle: #ffffff;
-    --game-over-button-bg: #456b62;
-
-    &[data-winner="blue"] {
-        --game-over-result: #29b9f6;
-    }
-
-    &[data-winner="orange"] {
-        --game-over-result: #f58e39;
-    }
-
-    &[data-winner="draw"] {
-        --game-over-result: #4dd6c3;
-    }
-
-    .game-over-screen__result {
-        text-transform: uppercase;
-    }
-}
-
-// Games
-.game-over-screen--winner[data-theme="games"] {
-    --game-over-bg: #294f60;
-    --game-over-button-bg: #754366;
-
-    &[data-winner="blue"] {
-        --game-over-result: #29b9f6;
-    }
-
-    &[data-winner="orange"] {
-        --game-over-result: #f58e39;
-    }
-
-    &[data-winner="draw"] {
-        --game-over-result: #ed2780;
-    }
-}
-
-// DA Projects
-.game-over-screen--winner[data-theme="da-projects"] {
-    --game-over-bg: #207c99;
-    --game-over-subtitle: #ffffff;
-    --game-over-result: #ffffff;
-    --game-over-button-bg: #bce8f4;
-    --game-over-button-text: #207c99;
-
-    &[data-winner="draw"] {
-        --game-over-result: #ff6758;
-    }
-}
-
-// Food
-.game-over-screen--winner[data-theme="food"] {
-    --game-over-bg: #f6f6f6;
-    --game-over-subtitle: #bd8558;
-    --game-over-result: #d36f24;
-    --game-over-button-bg: #f3832d;
-    --game-over-image-bg: #fbe5d5;
-
-    .game-over-screen__illustration {
-        padding: 10px;
-    }
-
-    .game-over-screen__result {
-        font-weight: 400;
-    }
-
-    &[data-winner="draw"] {
-        --game-over-result: #d36f24;
     }
 }

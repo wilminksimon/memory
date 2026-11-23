@@ -1,0 +1,61 @@
+// Game Screen
+.game-screen[data-theme="code-vibes"] {
+    --game-bg: #303131;
+    --header-bg: transparent;
+    --header-text: #ffffff;
+    --scoreboard-bg: #405b52;
+    --card-face-bg: #e8f3ef;
+    --card-width: 120px;
+    --card-aspect-ratio: 1;
+    --card-width-36: 100px;
+    --card-width-compact: 82px;
+    --popup-bg: #ffffff;
+    --popup-text: #303131;
+    --popup-primary: #57cbb4;
+    --popup-secondary: #57cbb4;
+}
+
+// Gemeinsame Exit-Button-Variablen
+.game-screen[data-theme="code-vibes"],
+.game-over-screen--winner[data-theme="code-vibes"] {
+    --exit-bg: rgba(134, 233, 214, 0.14);
+    --exit-radius: 0px;
+    --exit-border: 2px solid #4dd6c3;
+    --exit-text: #ffffff;
+    --exit-hover-text: #ffffff;
+    --exit-icon: #ffffff;
+    --exit-hover-bg: rgba(134, 233, 214, 0.26);
+}
+
+// Gemeinsame Game Over Einstellungen
+.game-over-screen[data-theme="code-vibes"] {
+    --game-over-bg: #303131;
+    --game-over-subtitle: #ffffff;
+    --game-over-image-bg: transparent;
+}
+
+// Score Screen
+.game-over-screen--score[data-theme="code-vibes"] {
+    --game-over-title: #4dd6c3;
+    --game-over-score-bg: #405b52;
+    --game-over-score-label: #ffffff;
+}
+
+// Winner Screen
+.game-over-screen--winner[data-theme="code-vibes"] {
+    &[data-winner="blue"] {
+        --game-over-result: #29b9f6;
+    }
+
+    &[data-winner="orange"] {
+        --game-over-result: #f58e39;
+    }
+
+    &[data-winner="draw"] {
+        --game-over-result: #4dd6c3;
+    }
+
+    .game-over-screen__result {
+        text-transform: uppercase;
+    }
+}

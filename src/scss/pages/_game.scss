@@ -1,27 +1,4 @@
 @use '../abstract/variables';
-@use 'sass:map';
-@use '../abstract/mixin';
-
-@each $theme, $settings in variables.$game-themes {
-    .game-screen[data-theme="#{$theme}"] {
-        --game-bg: #{map.get($settings, game-bg)};
-        --header-bg: #{map.get($settings, header-bg)};
-        --header-text: #{map.get($settings, header-text)};
-        --scoreboard-bg: #{map.get($settings, scoreboard-bg)};
-        --card-face-bg: #{map.get($settings, card-face-bg)};
-        --exit-bg: #{map.get($settings, exit-bg)};
-        --exit-hover-text: #{map.get($settings, exit-hover-text)};
-        --exit-icon: #{map.get($settings, exit-icon)};
-        --exit-radius: #{map.get($settings, exit-radius)};
-        --exit-border: #{map.get($settings, exit-border)};
-        --exit-text: #{map.get($settings, exit-text)};
-        --exit-hover-bg: #{map.get($settings, exit-hover-bg)};
-        --popup-bg: #{map.get($settings, popup-bg)};
-        --popup-text: #{map.get($settings, popup-text)};
-        --popup-primary: #{map.get($settings, popup-primary)};
-        --popup-secondary: #{map.get($settings, popup-secondary)};
-    }
-}
 
 .game-screen {
 
@@ -43,9 +20,9 @@
         }
 
         &[data-board-size="36"] .card {
-        width: 100px;
-        height: 100px;
-    }
+            width: 100px;
+            height: 100px;
+        }
     }
 
     &__header {
@@ -117,10 +94,12 @@
 
 .card {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: var(--card-width, 120px);
+    height: auto;
+    aspect-ratio: var(--card-aspect-ratio, 1);
     padding: 0;
     border: none;
+    border-radius: variables.$border-radius;
     background: transparent;
     cursor: pointer;
 
@@ -128,21 +107,27 @@
         position: relative;
         width: 100%;
         height: 100%;
+        border-radius: inherit;
         transform-style: preserve-3d;
-        transition: all 300ms ease-in-out;
+        transition: transform 300ms ease-in-out;
     }
 
     &__face {
         position: absolute;
         inset: 0;
         display: flex;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        border-radius: inherit;
+        overflow: hidden;
         align-items: center;
         justify-content: center;
         backface-visibility: hidden;
 
         &--back {
             transform: rotateY(180deg);
-            background-color: #e8f3ef;
+            background-color: var(--card-face-bg);
 
             img {
                 width: 100%;
@@ -154,8 +139,10 @@
         }
 
         img {
+            display: block;
             width: 100%;
             height: 100%;
+            border-radius: inherit;
             object-fit: contain;
         }
     }
@@ -230,8 +217,9 @@
 }
 
 @media (max-width: 1366px) {
-    .game-screen__board[data-board-size="36"] .card {
-        width: 82px;
-        height: 82px;
+    @media (max-width: 1366px) {
+        .game-screen__board[data-board-size="36"] .card {
+            width: var(--card-width-compact, 82px);
+        }
     }
 }
