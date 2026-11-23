@@ -2,6 +2,9 @@ import { cards } from '../data/cards';
 import { gameSettings } from '../data/game-settings';
 import type { MemoryCard } from '../types/game-types';
 
+/**
+ * Creates memory cards based on the selected game settings.
+ */
 export function createGameCards(): MemoryCard[] {
     const availableImages = [...cards[gameSettings.theme]];
     const pairCount = gameSettings.boardSize / 2;
@@ -19,6 +22,9 @@ export function createGameCards(): MemoryCard[] {
     return gameCards;
 }
 
+/**
+ * Randomly shuffles the elements of an array.
+ */
 function shuffleCards<T>(items: T[]): void {
     for (let i = items.length - 1; i > 0; i--) {
         const randomIndex = Math.floor(Math.random() * (i + 1));
