@@ -6,22 +6,21 @@ import background from '../../assets/logos/stadia_controller.svg';
 export function renderHomeScreen(): string {
     return `
         <main class="home-screen">
-        <div>
-            <aside class="text-48">It’s play time.</aside>
-            <h1 class="text-140">Ready to play?</h1>
-        </div>
+            <div>
+                <p class="text-48">It’s play time.</p>
+                <h1 class="text-140">Ready to play?</h1>
+            </div>
             <button class="button button--play">
-                <img class="button__controller" src="${controller}" alt="Controller">
+                <img class="button__controller" src="${controller}" alt="">
                 Play
-                <div class="button__arrow">
-                    <img class="button__arrow-default" src="${arrow}" alt="arrow">
-                    <img class="button__arrow-hover d-none" src="${arrowHover}" alt="arrow">
-                </div>
+                <span class="button__arrow">
+                    <img class="button__arrow-default" src="${arrow}" alt="">
+                    <img class="button__arrow-hover d-none" src="${arrowHover}" alt="">
+                </span>
             </button>
-
-            <img class="home-screen__background" src="${background}" alt="Controller">
+            <img class="home-screen__background" src="${background}" alt="">
         </main>
-`;
+    `;
 }
 
 export function initHomeScreen(onPlay: () => void): void {

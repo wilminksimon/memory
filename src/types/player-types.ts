@@ -1,1 +1,1 @@
-export type Player = | 'blue' | 'orange';
+export type Player = 'blue' | 'orange';

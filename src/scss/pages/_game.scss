@@ -20,8 +20,7 @@
         }
 
         &[data-board-size="36"] .card {
-            width: 100px;
-            height: 100px;
+            width: var(--card-width-36, 100px);
         }
     }
 
@@ -217,9 +216,7 @@
 }
 
 @media (max-width: 1366px) {
-    @media (max-width: 1366px) {
-        .game-screen__board[data-board-size="36"] .card {
-            width: var(--card-width-compact, 82px);
-        }
+    .game-screen__board[data-board-size="36"] .card {
+        width: var(--card-width-compact, 82px);
     }
 }

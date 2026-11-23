@@ -44,10 +44,7 @@ function renderGame(app: HTMLDivElement): void {
         finalGameState = game;
         changeScreen('gameOver');
     }, () => {
-        gameSettings.theme = 'code-vibes';
-        gameSettings.player = 'blue';
-        gameSettings.boardSize = 16;
-
+        resetGameSettings();
         changeScreen('settings');
     });
 }
@@ -55,6 +52,12 @@ function renderGame(app: HTMLDivElement): void {
 function changeScreen(screen: Screen): void {
     currentScreen = screen;
     renderApp();
+}
+
+function resetGameSettings(): void {
+    gameSettings.theme = 'code-vibes';
+    gameSettings.player = 'blue';
+    gameSettings.boardSize = 16;
 }
 
 function renderGameOver(app: HTMLDivElement): void {
@@ -67,37 +70,12 @@ function renderGameOver(app: HTMLDivElement): void {
         if (currentScreen !== 'gameOver') return;
 
         app.innerHTML = renderWinnerScreen(game);
-        initGameOverEvents(app, () => changeScreen('home'));
-    }, 9000);
-}
-
-function previewScoreScreen(theme: Theme): void {
-    if (!app) return;
-    gameSettings.theme = theme;
-    const game: GameState = {
-        currentPlayer: 'blue',
-        scores: { blue: 6, orange: 3 }
-    };
-    app.innerHTML = renderScoreScreen(game);
-}
-
-function previewWinnerScreen(theme: Theme, winner: 'blue' | 'orange' | 'draw'): void {
-    if (!app) return;
-    gameSettings.theme = theme;
-    const scores = winner === 'draw'
-        ? { blue: 4, orange: 4 }
-        : winner === 'blue' ? { blue: 6, orange: 2 } : { blue: 2, orange: 6 };
-    const game: GameState = { currentPlayer: 'blue', scores };
-    app.innerHTML = renderWinnerScreen(game);
-    initGameOverEvents(app, () => changeScreen('home'));
-}
-
-if (import.meta.env.DEV) {
-    Object.assign(window, {
-        previewScoreScreen,
-        previewWinnerScreen,
-        previewSettings: () => changeScreen('settings')
-    });
+        initGameOverEvents(app, () => {
+            resetGameSettings();
+            finalGameState = null;
+            changeScreen('home');
+        });
+    }, 4000);
 }
 
 renderApp();
