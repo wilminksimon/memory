@@ -49,7 +49,6 @@ function initChoiceLines(app: HTMLDivElement, lines: ChoiceLines): void {
 function updateSelectedTheme(theme: Theme, app: HTMLDivElement): void {
     gameSettings.theme = theme;
     updateThemePreview(theme, app);
-    console.log(gameSettings.theme)
 }
 
 function updateThemePreview(theme: Theme, app: HTMLDivElement): void {
@@ -62,12 +61,10 @@ function updateThemePreview(theme: Theme, app: HTMLDivElement): void {
 
 function updateSelectedPlayer(player: Player): void {
     gameSettings.player = player;
-    console.log(gameSettings.player)
 }
 
 function updateSelectedBoardSize(size: BoardSize): void {
     gameSettings.boardSize = size;
-    console.log(gameSettings.boardSize)
 }
 
 type ChoiceName = 'theme' | 'player' | 'board-size';
