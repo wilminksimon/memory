@@ -40,7 +40,7 @@ function renderGame(app: HTMLDivElement): void {
     initGameEvents(app, game => {
         finalGameState = game;
         changeScreen('gameOver');
-    });
+    }, () => changeScreen('settings'));
 }
 
 function changeScreen(screen: Screen): void {

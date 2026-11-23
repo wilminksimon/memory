@@ -18,7 +18,8 @@ interface GameEventState {
 
 export function initGameEvents(
     app: HTMLDivElement,
-    onGameOver: (game: GameState) => void
+    onGameOver: (game: GameState) => void,
+    onExitGame: () => void
 ): void {
     const fieldRef = app.querySelector('#field');
     if (!fieldRef) return;
@@ -28,6 +29,8 @@ export function initGameEvents(
     updateCurrentPlayer(app, gameState.game);
 
     fieldRef.addEventListener('click', event => handleCardClick(event, gameState, app));
+
+    initExitPopup(app, onExitGame);
 }
 
 function createEventState(onGameOver: (game: GameState) => void): GameEventState {
@@ -115,4 +118,17 @@ function updateCurrentPlayer(app: HTMLDivElement, game: GameState): void {
     const indicator = app.querySelector<HTMLElement>('.game-screen__player-indicator');
 
     if (indicator) indicator.dataset.player = game.currentPlayer;
+}
+
+function initExitPopup(app: HTMLDivElement, onExitGame: () => void): void {
+    const popup = app.querySelector<HTMLDialogElement>('.game-screen__popup');
+    const exitButton = app.querySelector<HTMLButtonElement>('.button--exit');
+    const backButton = app.querySelector<HTMLButtonElement>('.button--popup-back');
+    const confirmButton = app.querySelector<HTMLButtonElement>('.button--popup-exit');
+
+    if (!popup || !exitButton || !backButton || !confirmButton) return;
+
+    exitButton.onclick = () => popup.showModal();
+    backButton.onclick = () => popup.close();
+    confirmButton.onclick = onExitGame;
 }

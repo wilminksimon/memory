@@ -10,6 +10,7 @@
         --scoreboard-bg: #{map.get($settings, scoreboard-bg)};
         --card-face-bg: #{map.get($settings, card-face-bg)};
         --exit-bg: #{map.get($settings, exit-bg)};
+        --exit-hover-text: #{map.get($settings, exit-hover-text)};
         --exit-icon: #{map.get($settings, exit-icon)};
         --exit-radius: #{map.get($settings, exit-radius)};
         --exit-border: #{map.get($settings, exit-border)};
@@ -33,9 +34,13 @@
         justify-content: center;
         width: max-content;
         margin: 55px auto;
-        gap: 16px;
+        gap: 6px;
         background-color: transparent;
         color: var(--header-text);
+
+        &[data-board-size="16"] {
+            gap: 16px;
+        }
     }
 
     &__header {
@@ -44,7 +49,7 @@
         padding-left: 24px;
         padding-right: 24px;
         align-items: center;
-        max-width: 1210px;
+        max-width: 90%;
         height: 102px;
         border-radius: 10px;
         margin: 0 auto;
@@ -54,10 +59,14 @@
 
     &__scoreboard {
         display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 292px;
+        height: 62px;
         gap: 12px;
         padding: 12px 20px;
-        width: max-content;
         background-color: var(--scoreboard-bg);
+
     }
 
     &__score {
@@ -103,8 +112,8 @@
 
 .card {
     position: relative;
-    width: 90px;
-    height: 90px;
+    width: 120px;
+    height: 120px;
     padding: 0;
     border: none;
     background: transparent;
@@ -148,5 +157,69 @@
 
     &.is-flipped .card__inner {
         transform: rotateY(180deg);
+    }
+}
+
+.game-screen__popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: min(539px);
+    height: 270px;
+    margin: 0;
+    padding: 40px;
+
+    border: none;
+    background-color: var(--popup-bg);
+    color: var(--popup-text);
+}
+
+.game-screen__popup::backdrop {
+    background-color: rgba(0, 0, 0, 0.65);
+}
+
+.game-screen__popup-content {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+        margin-bottom: 24px;
+        font-family: 'Almarai', sans-serif;
+        font-size: 32px;
+        line-height: 1.3;
+        text-align: center;
+    }
+}
+
+.game-screen__popup-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    height: 57px;
+
+    .button {
+        padding: 10px;
+        font-family: 'Almarai', sans-serif;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .button--popup-back {
+        background-color: var(--popup-primary);
+        border: 1px solid var(--popup-primary);
+        color: var(--popup-text);
+        width: 182px;
+    }
+
+    .button--popup-exit {
+        background-color: transparent;
+        border: 1px solid var(--popup-secondary);
+        color: var(--popup-secondary);
+        width: 148px;
     }
 }
