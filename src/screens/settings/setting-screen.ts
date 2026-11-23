@@ -6,7 +6,9 @@ import headerLine from '../../assets/logos/Line 3.png';
 import space from '../../assets/logos/space.png';
 import startButton from '../../assets/logos/smart_display.png';
 
-
+/**
+ * Renders the settings screen with all available options.
+ */
 export function renderSettingsScreen(): string {
     return `
 <main class="settings-screen">

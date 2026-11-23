@@ -2,14 +2,14 @@ import { createGameCards } from '../../game-logic/game';
 import { gameSettings } from '../../data/game-settings';
 import { cardBacks } from '../../data/cards';
 
+/**
+ * Renders the memory game screen with the selected settings.
+ */
 export function renderGameScreen(): string {
-
     const cards = createGameCards();
     const cardBack = cardBacks[gameSettings.theme];
     const boardSize = gameSettings.boardSize;
-
     const columns = boardSize === 16 ? 4 : 6;
-
     const cardsHTML = cards.map(card => `
         <button class="card" type="button"
             data-card-id="${card.id}"

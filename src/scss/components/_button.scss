@@ -63,30 +63,29 @@
         -webkit-mask: url('../../assets/logos/exit-icon.svg') no-repeat center / contain;
     }
 
-    &--exit {
-        height: auto;
-        gap: 10px;
-        padding: 12px 24px;
-        background-color: var(--exit-bg);
-        border-radius: var(--exit-radius);
-        color: var(--exit-text);
-        border: var(--exit-border);
-        font-size: 24px;
-        width: 207px;
-        height: 62px;
-        border-width: 2px;
-        padding: 12px 20px;
-        transition: all 200ms ease;
+&--exit {
+    width: 207px;
+    height: 62px;
+    gap: 10px;
+    padding: 12px 20px;
 
-        &:hover {
-            background-color: var(--exit-hover-bg);
-            color: var(--exit-hover-text);
+    background-color: var(--exit-bg);
+    border-radius: var(--exit-radius);
+    color: var(--exit-text);
+    border: var(--exit-border);
 
-            .button__exit-icon {
-                background-color: var(--exit-icon);
-            }
+    font-size: 24px;
+    transition: all 200ms ease;
+
+    &:hover {
+        background-color: var(--exit-hover-bg);
+        color: var(--exit-hover-text);
+
+        .button__exit-icon {
+            background-color: var(--exit-icon);
         }
     }
+}
 
 
 

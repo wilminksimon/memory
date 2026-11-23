@@ -10,12 +10,18 @@ import playerOrange from '../../assets/game-over/player-orange.svg';
 import trophy from '../../assets/game-over/pokal.svg';
 import scale from '../../assets/game-over/scale-icon.svg';
 
+/**
+ * Returns the result illustration for the selected theme and winner.
+ */
 function getResultImage(theme: Theme, winner: Player | null): string {
     if (!winner) return scale;
     if (theme === 'games') return trophy;
     return winner === 'blue' ? playerBlue : playerOrange;
 }
 
+/**
+ * Renders the final score screen.
+ */
 export function renderScoreScreen(game: GameState): string {
     return `
         <main class="game-over-screen game-over-screen--score"
@@ -41,6 +47,9 @@ export function renderScoreScreen(game: GameState): string {
     `;
 }
 
+/**
+ * Renders the winner or draw screen.
+ */
 export function renderWinnerScreen(game: GameState): string {
     const winner = getWinner(game);
     const winnerName = winner
