@@ -10,8 +10,11 @@
         --scoreboard-bg: #{map.get($settings, scoreboard-bg)};
         --card-face-bg: #{map.get($settings, card-face-bg)};
         --exit-bg: #{map.get($settings, exit-bg)};
+        --exit-icon: #{map.get($settings, exit-icon)};
+        --exit-radius: #{map.get($settings, exit-radius)};
         --exit-border: #{map.get($settings, exit-border)};
         --exit-text: #{map.get($settings, exit-text)};
+        --exit-hover-bg: #{map.get($settings, exit-hover-bg)};
         --popup-bg: #{map.get($settings, popup-bg)};
         --popup-text: #{map.get($settings, popup-text)};
         --popup-primary: #{map.get($settings, popup-primary)};
@@ -36,10 +39,14 @@
     }
 
     &__header {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 24px;
+        padding-right: 24px;
         align-items: center;
         max-width: 1210px;
+        height: 102px;
+        border-radius: 10px;
         margin: 0 auto;
         background-color: var(--header-bg);
         color: var(--header-text);

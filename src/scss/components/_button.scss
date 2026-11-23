@@ -55,21 +55,35 @@
         font-family: RedRose;
     }
 
+    &__exit-icon {
+        width: 30px;
+        height: 30px;
+        background-color: var(--exit-text);
+        mask: url('../../assets/logos/exit-icon.svg') no-repeat center / contain;
+        -webkit-mask: url('../../assets/logos/exit-icon.svg') no-repeat center / contain;
+    }
+
     &--exit {
         height: auto;
+        gap: 10px;
         padding: 12px 24px;
-        background-color: #354f49;
-        color: white;
-        border: 1px solid #4dd6c3;
+        background-color: var(--exit-bg);
+        border-radius: var(--exit-radius);
+        color: var(--exit-text);
+        border: var(--exit-border);
         font-size: 18px;
         width: 195px;
         height: 54px;
-        border-radius: 10px;
         border-width: 2px;
         padding: 12px 20px;
+        transition: all 200ms ease;
 
         &:hover {
-            background-color: #45665e;
+            background-color: var(--exit-hover-bg);
+
+            .button__exit-icon {
+                background-color: var(--exit-icon);
+            }
         }
     }
 
