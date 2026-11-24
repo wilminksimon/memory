@@ -28,6 +28,7 @@ export function initSettingsEvents(
     });
 
     initChoiceLines(app, lines);
+    initThemePreviewHover(app, lines);
     updateSettingsSummary(app);
 
     const startButton = app.querySelector<HTMLButtonElement>('.button--startGame');
@@ -59,6 +60,54 @@ function initChoiceLines(app: HTMLDivElement, lines: ChoiceLines): void {
     );
 
     inputs.forEach(input => updateChoiceLine(input, lines));
+}
+
+/**
+ * Initializes hover previews for theme options.
+ */
+function initThemePreviewHover(app: HTMLDivElement, lines: ChoiceLines): void {
+    const choices = app.querySelectorAll<HTMLLabelElement>('.settings-screen__choice');
+
+    choices.forEach(choice => {
+        const input = choice.querySelector<HTMLInputElement>('input[name="theme"]');
+        if (!input) return;
+
+        choice.addEventListener('mouseenter', () => previewTheme(input, app, lines));
+        choice.addEventListener('mouseleave', () => restoreSelectedTheme(app, lines));
+        input.addEventListener('click', () => selectTheme(input, app, lines));
+    });
+}
+
+/**
+ * Temporarily selects and previews the hovered theme.
+ */
+function previewTheme(input: HTMLInputElement, app: HTMLDivElement, lines: ChoiceLines): void {
+    input.checked = true;
+    updateChoiceLine(input, lines);
+    updateThemePreview(input.value as Theme, app);
+}
+
+/**
+ * Restores the actually selected theme after hovering.
+ */
+function restoreSelectedTheme(app: HTMLDivElement, lines: ChoiceLines): void {
+    const input = app.querySelector<HTMLInputElement>(
+        `input[name="theme"][value="${gameSettings.theme}"]`
+    );
+    if (!input) return;
+
+    input.checked = true;
+    updateChoiceLine(input, lines);
+    updateThemePreview(gameSettings.theme, app);
+}
+
+/**
+ * Saves the clicked theme and updates the settings summary.
+ */
+function selectTheme(input: HTMLInputElement, app: HTMLDivElement, lines: ChoiceLines): void {
+    updateSelectedTheme(input.value as Theme, app);
+    updateChoiceLine(input, lines);
+    updateSettingsSummary(app);
 }
 
 /**
