@@ -84,22 +84,38 @@ function resetGameSettings(): void {
 /**
  * Renders the score screen and then the winner screen.
  */
+/**
+ * Renders the score screen and then the winner screen.
+ */
 function renderGameOver(app: HTMLDivElement): void {
     if (!finalGameState) return;
 
     const game = finalGameState;
     app.innerHTML = renderScoreScreen(game);
 
-    setTimeout(() => {
-        if (currentScreen !== 'gameOver') return;
+    setTimeout(() => showWinnerScreen(app, game), SCORE_SCREEN_DURATION);
+}
 
-        app.innerHTML = renderWinnerScreen(game);
-        initGameOverEvents(app, () => {
-            resetGameSettings();
-            finalGameState = null;
-            changeScreen('home');
-        });
-    }, SCORE_SCREEN_DURATION);
+/**
+ * Displays the winner screen over the score screen.
+ */
+function showWinnerScreen(app: HTMLDivElement, game: GameState): void {
+    if (currentScreen !== 'gameOver') return;
+
+    const scoreScreen = app.querySelector('.game-over-screen--score');
+    if (!scoreScreen) return;
+
+    scoreScreen.insertAdjacentHTML('beforeend', renderWinnerScreen(game));
+    initGameOverEvents(app, onBackToHome);
+}
+
+/**
+ * Returns to the home screen.
+ */
+function onBackToHome(): void {
+    resetGameSettings();
+    finalGameState = null;
+    changeScreen('home');
 }
 
 renderApp();
