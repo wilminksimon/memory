@@ -13,6 +13,7 @@ import { gameSettings } from './data/game-settings';
 
 const SCORE_SCREEN_DURATION = 3500;
 
+/** Identifies a screen that can be rendered by the application. */
 type Screen = 'home' | 'settings' | 'game' | 'gameOver';
 
 let currentScreen: Screen = 'home';
@@ -34,6 +35,7 @@ function renderApp(): void {
 
 /**
  * Renders the home screen and initializes its events.
+ * @param app Root element that contains the active application screen.
  */
 function renderHome(app: HTMLDivElement): void {
     app.innerHTML = renderHomeScreen();
@@ -42,6 +44,7 @@ function renderHome(app: HTMLDivElement): void {
 
 /**
  * Renders the settings screen and initializes its events.
+ * @param app Root element that contains the active application screen.
  */
 function renderSettings(app: HTMLDivElement): void {
     app.innerHTML = renderSettingsScreen();
@@ -50,6 +53,7 @@ function renderSettings(app: HTMLDivElement): void {
 
 /**
  * Renders the game screen and initializes its events.
+ * @param app Root element that contains the active application screen.
  */
 function renderGame(app: HTMLDivElement): void {
     app.innerHTML = renderGameScreen();
@@ -66,6 +70,7 @@ function renderGame(app: HTMLDivElement): void {
 
 /**
  * Changes the active screen and renders it.
+ * @param screen Screen identifier to activate.
  */
 function changeScreen(screen: Screen): void {
     currentScreen = screen;
@@ -83,9 +88,8 @@ function resetGameSettings(): void {
 
 /**
  * Renders the score screen and then the winner screen.
- */
-/**
- * Renders the score screen and then the winner screen.
+ * @param app Root element that contains the active application screen.
+ * @param app Root element that contains the active application screen.
  */
 function renderGameOver(app: HTMLDivElement): void {
     if (!finalGameState) return;
@@ -98,6 +102,8 @@ function renderGameOver(app: HTMLDivElement): void {
 
 /**
  * Displays the winner screen over the score screen.
+ * @param app Root element that contains the active application screen.
+ * @param game Completed game state whose result is displayed.
  */
 function showWinnerScreen(app: HTMLDivElement, game: GameState): void {
     if (currentScreen !== 'gameOver') return;

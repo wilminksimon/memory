@@ -4,6 +4,7 @@ import { cardBacks } from '../../data/cards';
 
 /**
  * Renders the memory game screen with the selected settings.
+ * @returns HTML markup for the game board and its controls.
  */
 export function renderGameScreen(): string {
     const cards = createGameCards();

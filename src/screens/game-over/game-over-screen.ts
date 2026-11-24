@@ -12,6 +12,9 @@ import scale from '../../assets/game-over/scale-icon.svg';
 
 /**
  * Returns the result illustration for the selected theme and winner.
+ * @param theme Theme selected for the completed game.
+ * @param winner Winning player, or null when the scores are tied.
+ * @returns URL of the illustration to display.
  */
 function getResultImage(theme: Theme, winner: Player | null): string {
     if (!winner) return scale;
@@ -21,6 +24,8 @@ function getResultImage(theme: Theme, winner: Player | null): string {
 
 /**
  * Renders the final score screen.
+ * @param game Completed game state containing both scores.
+ * @returns HTML markup for the score screen.
  */
 export function renderScoreScreen(game: GameState): string {
     return `
@@ -49,6 +54,8 @@ export function renderScoreScreen(game: GameState): string {
 
 /**
  * Renders the winner or draw screen.
+ * @param game Completed game state used to determine the result.
+ * @returns HTML markup for the winner or draw screen.
  */
 export function renderWinnerScreen(game: GameState): string {
     const winner = getWinner(game);

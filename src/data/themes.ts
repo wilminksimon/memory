@@ -3,6 +3,7 @@ import games from '../assets/theme-previews/games.svg';
 import daProjects from '../assets/theme-previews/da-projects.svg';
 import food from '../assets/theme-previews/food.svg';
 
+/** Maps each game theme to its preview image URL. */
 export const themePreviews = {
     'code-vibes': codeVibes,
     games: games,

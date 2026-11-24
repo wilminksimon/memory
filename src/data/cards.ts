@@ -86,6 +86,7 @@ import gamingBack from '../assets/memory-images/gaming/backside-gaming.svg';
 import daProjectsBack from '../assets/memory-images/da-project/backside-da-projekt.svg';
 import foodsBack from '../assets/memory-images/foods/backside-foods.svg';
 
+/** Maps each theme to the image URLs available for card faces. */
 export const cards: Record<Theme, string[]> = {
     'code-vibes': [
         angular, bootstrap, css, django, firebase, git,
@@ -112,6 +113,7 @@ export const cards: Record<Theme, string[]> = {
     ]
 };
 
+/** Maps each theme to the image URL used for the back of its cards. */
 export const cardBacks: Record<Theme, string> = {
     'code-vibes': codeVibesBack,
     games: gamingBack,

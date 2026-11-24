@@ -1,5 +1,7 @@
 /**
  * Initializes the winner screen button.
+ * @param app Root element containing the winner screen.
+ * @param onBackToHome Callback invoked when the player returns to the home screen.
  */
 export function initGameOverEvents(
     app: HTMLDivElement,

@@ -4,6 +4,7 @@ import type { MemoryCard } from '../types/game-types';
 
 /**
  * Creates memory cards based on the selected game settings.
+ * @returns A shuffled deck containing two cards for every selected image.
  */
 export function createGameCards(): MemoryCard[] {
     const availableImages = [...cards[gameSettings.theme]];
@@ -22,8 +23,8 @@ export function createGameCards(): MemoryCard[] {
     return gameCards;
 }
 
-/**
- * Randomly shuffles the elements of an array.
+/** Randomly shuffles the elements of an array
+ * @param items Array whose element order will be randomized.
  */
 function shuffleCards<T>(items: T[]): void {
     for (let i = items.length - 1; i > 0; i--) {

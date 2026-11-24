@@ -8,6 +8,7 @@ import startButton from '../../assets/logos/smart_display.png';
 
 /**
  * Renders the settings screen with all available options.
+ * @returns HTML markup for the settings screen.
  */
 export function renderSettingsScreen(): string {
     return `

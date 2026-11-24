@@ -34,6 +34,7 @@ export function renderHomeScreen(): string {
 
 /**
  * Initializes the home screen event listeners.
+ * @param onPlay Callback invoked when the play button is clicked.
  */
 export function initHomeScreen(onPlay: () => void): void {
     const playButton = document.querySelector<HTMLButtonElement>('.button--play');
