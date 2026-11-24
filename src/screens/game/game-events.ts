@@ -9,6 +9,7 @@ import type { GameState } from '../../types/game-types';
 
 const CARDS_PER_PAIR = 2;
 const MISMATCH_DELAY = 1000;
+const GAME_OVER_DELAY = 1000;
 
 /**
  * Stores the current state of the game events.
@@ -110,7 +111,7 @@ function handleMatch(gameState: GameEventState, app: HTMLDivElement): void {
     gameState.openedCards = [];
 
     if (gameState.matchedPairs === gameSettings.boardSize / CARDS_PER_PAIR) {
-        gameState.onGameOver(gameState.game);
+        setTimeout(() => gameState.onGameOver(gameState.game), GAME_OVER_DELAY);
     }
 }
 
