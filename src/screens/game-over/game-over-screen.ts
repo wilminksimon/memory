@@ -64,7 +64,7 @@ export function renderWinnerScreen(game: GameState): string {
         : '';
 
     return `
-        <main class="game-over-screen game-over-screen--winner"
+        <section class="game-over-screen game-over-screen--winner"
             data-theme="${gameSettings.theme}"
             data-winner="${winner ?? 'draw'}">
 
@@ -72,7 +72,7 @@ export function renderWinnerScreen(game: GameState): string {
 
             <section class="game-over-screen__content">
                 <p class="game-over-screen__subtitle">${resultText}</p>
-                <h1 class="game-over-screen__result">${winnerName}</h1>
+                <h2 class="game-over-screen__result">${winnerName}</h2>
 
                 <img
                     class="game-over-screen__illustration"
@@ -84,6 +84,6 @@ export function renderWinnerScreen(game: GameState): string {
                     Back to start
                 </button>
             </section>
-        </main>
+        </section>
     `;
 }

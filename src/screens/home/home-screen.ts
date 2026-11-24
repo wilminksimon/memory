@@ -9,10 +9,10 @@ import background from '../../assets/logos/stadia_controller.svg';
 export function renderHomeScreen(): string {
     return `
         <main class="home-screen">
-            <div>
+            <header class="home-screen__intro">
                 <p class="text-48">It’s play time.</p>
                 <h1 class="text-140">Ready to play?</h1>
-            </div>
+            </header>
 
             <button class="button button--play" type="button">
                 <img class="button__controller" src="${controller}" alt="">

@@ -31,7 +31,7 @@ export function renderGameScreen(): string {
     `).join('');
 
     return `
-        <section class="game-screen" data-theme="${gameSettings.theme}">
+        <main class="game-screen" data-theme="${gameSettings.theme}">
             <div class="game-screen__container">
 
                 <header class="game-screen__header">
@@ -81,6 +81,6 @@ export function renderGameScreen(): string {
                     </div>
                 </div>
             </dialog>
-        </section>
+        </main>
     `;
 }
