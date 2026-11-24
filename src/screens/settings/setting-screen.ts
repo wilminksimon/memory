@@ -101,7 +101,7 @@ export function renderSettingsScreen(): string {
                     </div>
 
                     <button class="button button--startGame" type="button">
-                        <img src="${startButton}" alt="Space">Start
+                        <img src="${startButton}" class="button__play" alt="Space">Start
                     </button>
                 </footer>
 
