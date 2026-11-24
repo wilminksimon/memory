@@ -62,6 +62,24 @@
         &:hover {
             scale: 1.1;
         }
+
+        &:disabled {
+
+            &:hover {
+                background-color: #e5e5e5;
+                color: #999999;
+                border-color: #e5e5e5;
+                opacity: 0.8;
+                cursor: not-allowed;
+                transform: none;
+                box-shadow: none;
+            }
+
+            img {
+                filter: grayscale(1);
+                opacity: 0.5;
+            }
+        }
     }
 
     &__exit-icon {
@@ -72,29 +90,29 @@
         -webkit-mask: url('../../assets/logos/exit-icon.svg') no-repeat center / contain;
     }
 
-&--exit {
-    width: 207px;
-    height: 62px;
-    gap: 10px;
-    padding: 12px 20px;
+    &--exit {
+        width: 207px;
+        height: 62px;
+        gap: 10px;
+        padding: 12px 20px;
 
-    background-color: var(--exit-bg);
-    border-radius: var(--exit-radius);
-    color: var(--exit-text);
-    border: var(--exit-border);
+        background-color: var(--exit-bg);
+        border-radius: var(--exit-radius);
+        color: var(--exit-text);
+        border: var(--exit-border);
 
-    font-size: 24px;
-    transition: all 200ms ease;
+        font-size: 24px;
+        transition: all 200ms ease;
 
-    &:hover {
-        background-color: var(--exit-hover-bg);
-        color: var(--exit-hover-text);
+        &:hover {
+            background-color: var(--exit-hover-bg);
+            color: var(--exit-hover-text);
 
-        .button__exit-icon {
-            background-color: var(--exit-icon);
+            .button__exit-icon {
+                background-color: var(--exit-icon);
+            }
         }
     }
-}
 
 
 
