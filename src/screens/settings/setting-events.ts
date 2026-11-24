@@ -13,6 +13,9 @@ const THEME_LABELS: Record<Theme, string> = {
     food: 'Food'
 };
 
+type ChoiceName = 'theme' | 'player' | 'board-size';
+type ChoiceLines = Record<ChoiceName, HTMLImageElement>;
+
 /**
  * Initializes the settings event listeners.
  */
@@ -28,7 +31,7 @@ export function initSettingsEvents(
     });
 
     initChoiceLines(app, lines);
-    initThemePreviewHover(app, lines);
+    initSettingHover(app, lines);
     updateSettingsSummary(app);
 
     const startButton = app.querySelector<HTMLButtonElement>('.button--startGame');
@@ -40,19 +43,22 @@ export function initSettingsEvents(
  */
 function handleSettingsChange(event: Event, app: HTMLDivElement, lines: ChoiceLines): void {
     if (!(event.target instanceof HTMLInputElement)) return;
+    if (isSettingSelected(event.target)) return;
 
-    const input = event.target;
-    updateChoiceLine(input, lines);
-
-    if (input.name === 'theme') updateSelectedTheme(input.value as Theme, app);
-    else if (input.name === 'player') updateSelectedPlayer(input.value as Player);
-    else if (input.name === 'board-size') updateSelectedBoardSize(Number(input.value) as BoardSize);
-
-    updateSettingsSummary(app);
+    selectSetting(event.target, app, lines);
 }
 
 /**
- * Initializes the decorative lines for the selected options.
+ * Checks whether a setting is already saved.
+ */
+function isSettingSelected(input: HTMLInputElement): boolean {
+    if (input.name === 'theme') return gameSettings.theme === input.value;
+    if (input.name === 'player') return gameSettings.player === input.value;
+    return gameSettings.boardSize === Number(input.value);
+}
+
+/**
+ * Initializes the decorative lines for selected options.
  */
 function initChoiceLines(app: HTMLDivElement, lines: ChoiceLines): void {
     const inputs = app.querySelectorAll<HTMLInputElement>(
@@ -63,49 +69,71 @@ function initChoiceLines(app: HTMLDivElement, lines: ChoiceLines): void {
 }
 
 /**
- * Initializes hover previews for theme options.
+ * Initializes hover previews for all setting options.
  */
-function initThemePreviewHover(app: HTMLDivElement, lines: ChoiceLines): void {
+function initSettingHover(app: HTMLDivElement, lines: ChoiceLines): void {
     const choices = app.querySelectorAll<HTMLLabelElement>('.settings-screen__choice');
 
     choices.forEach(choice => {
-        const input = choice.querySelector<HTMLInputElement>('input[name="theme"]');
+        const input = choice.querySelector<HTMLInputElement>('input[type="radio"]');
         if (!input) return;
 
-        choice.addEventListener('mouseenter', () => previewTheme(input, app, lines));
-        choice.addEventListener('mouseleave', () => restoreSelectedTheme(app, lines));
-        input.addEventListener('click', () => selectTheme(input, app, lines));
+        choice.addEventListener('mouseenter', () => previewSetting(input, app, lines));
+        choice.addEventListener('mouseleave', () => restoreSelectedSetting(input.name as ChoiceName, app, lines));
+        input.addEventListener('click', () => selectSetting(input, app, lines));
     });
 }
 
 /**
- * Temporarily selects and previews the hovered theme.
+ * Temporarily previews the hovered setting option.
  */
-function previewTheme(input: HTMLInputElement, app: HTMLDivElement, lines: ChoiceLines): void {
+function previewSetting(input: HTMLInputElement, app: HTMLDivElement, lines: ChoiceLines): void {
     input.checked = true;
     updateChoiceLine(input, lines);
-    updateThemePreview(input.value as Theme, app);
+
+    if (input.name === 'theme') {
+        updateThemePreview(input.value as Theme, app);
+    }
 }
 
 /**
- * Restores the actually selected theme after hovering.
+ * Restores the actually selected option after hovering.
  */
-function restoreSelectedTheme(app: HTMLDivElement, lines: ChoiceLines): void {
+function restoreSelectedSetting(
+    name: ChoiceName,
+    app: HTMLDivElement,
+    lines: ChoiceLines
+): void {
+    const value = getSettingValue(name);
     const input = app.querySelector<HTMLInputElement>(
-        `input[name="theme"][value="${gameSettings.theme}"]`
+        `input[name="${name}"][value="${value}"]`
     );
+
     if (!input) return;
 
     input.checked = true;
     updateChoiceLine(input, lines);
-    updateThemePreview(gameSettings.theme, app);
+
+    if (name === 'theme') updateThemePreview(gameSettings.theme, app);
 }
 
 /**
- * Saves the clicked theme and updates the settings summary.
+ * Returns the saved value of a setting.
  */
-function selectTheme(input: HTMLInputElement, app: HTMLDivElement, lines: ChoiceLines): void {
-    updateSelectedTheme(input.value as Theme, app);
+function getSettingValue(name: ChoiceName): string {
+    if (name === 'theme') return gameSettings.theme;
+    if (name === 'player') return gameSettings.player;
+    return String(gameSettings.boardSize);
+}
+
+/**
+ * Saves the clicked setting and updates the summary.
+ */
+function selectSetting(input: HTMLInputElement, app: HTMLDivElement, lines: ChoiceLines): void {
+    if (input.name === 'theme') updateSelectedTheme(input.value as Theme, app);
+    else if (input.name === 'player') updateSelectedPlayer(input.value as Player);
+    else updateSelectedBoardSize(Number(input.value) as BoardSize);
+
     updateChoiceLine(input, lines);
     updateSettingsSummary(app);
 }
@@ -197,7 +225,3 @@ function updateSettingsSummary(app: HTMLDivElement): void {
     if (player) player.textContent = gameSettings.player;
     if (board) board.textContent = `${gameSettings.boardSize} Cards`;
 }
-
-type ChoiceName = 'theme' | 'player' | 'board-size';
-
-type ChoiceLines = Record<ChoiceName, HTMLImageElement>;
