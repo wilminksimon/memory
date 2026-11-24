@@ -16,6 +16,12 @@ const THEME_LABELS: Record<Theme, string> = {
 type ChoiceName = 'theme' | 'player' | 'board-size';
 type ChoiceLines = Record<ChoiceName, HTMLImageElement>;
 
+interface SelectedOptions {
+    theme: boolean;
+    player: boolean;
+    'board-size': boolean;
+}
+
 /**
  * Initializes the settings event listeners.
  */
@@ -25,53 +31,53 @@ export function initSettingsEvents(
 ): void {
     const options = app.querySelector('.settings-screen__options');
     const lines = createChoiceLines();
+    const selected = createSelectedOptions();
 
     options?.addEventListener('change', event => {
-        handleSettingsChange(event, app, lines);
+        handleSettingsChange(event, app, lines, selected);
     });
 
-    initChoiceLines(app, lines);
-    initSettingHover(app, lines);
-    updateSettingsSummary(app);
+    initSettingHover(app, lines, selected);
+    restoreDefaultThemePreview(app, lines);
+    updateSettingsSummary(app, selected);
+    updateStartButton(app, selected);
 
     const startButton = app.querySelector<HTMLButtonElement>('.button--startGame');
     startButton?.addEventListener('click', onStartGame);
 }
 
 /**
- * Handles changes to the selected game settings.
+ * Creates the initial selection state.
  */
-function handleSettingsChange(event: Event, app: HTMLDivElement, lines: ChoiceLines): void {
+function createSelectedOptions(): SelectedOptions {
+    return {
+        theme: false,
+        player: false,
+        'board-size': false
+    };
+}
+
+/**
+ * Handles changes to the selected settings.
+ */
+function handleSettingsChange(
+    event: Event,
+    app: HTMLDivElement,
+    lines: ChoiceLines,
+    selected: SelectedOptions
+): void {
     if (!(event.target instanceof HTMLInputElement)) return;
-    if (isSettingSelected(event.target)) return;
-
-    selectSetting(event.target, app, lines);
-}
-
-/**
- * Checks whether a setting is already saved.
- */
-function isSettingSelected(input: HTMLInputElement): boolean {
-    if (input.name === 'theme') return gameSettings.theme === input.value;
-    if (input.name === 'player') return gameSettings.player === input.value;
-    return gameSettings.boardSize === Number(input.value);
-}
-
-/**
- * Initializes the decorative lines for selected options.
- */
-function initChoiceLines(app: HTMLDivElement, lines: ChoiceLines): void {
-    const inputs = app.querySelectorAll<HTMLInputElement>(
-        '.settings-screen__options input:checked'
-    );
-
-    inputs.forEach(input => updateChoiceLine(input, lines));
+    selectSetting(event.target, app, lines, selected);
 }
 
 /**
  * Initializes hover previews for all setting options.
  */
-function initSettingHover(app: HTMLDivElement, lines: ChoiceLines): void {
+function initSettingHover(
+    app: HTMLDivElement,
+    lines: ChoiceLines,
+    selected: SelectedOptions
+): void {
     const choices = app.querySelectorAll<HTMLLabelElement>('.settings-screen__choice');
 
     choices.forEach(choice => {
@@ -79,15 +85,19 @@ function initSettingHover(app: HTMLDivElement, lines: ChoiceLines): void {
         if (!input) return;
 
         choice.addEventListener('mouseenter', () => previewSetting(input, app, lines));
-        choice.addEventListener('mouseleave', () => restoreSelectedSetting(input.name as ChoiceName, app, lines));
-        input.addEventListener('click', () => selectSetting(input, app, lines));
+        choice.addEventListener('mouseleave', () => restoreSelectedSetting(input.name as ChoiceName, app, lines, selected));
+        input.addEventListener('click', () => selectSetting(input, app, lines, selected));
     });
 }
 
 /**
- * Temporarily previews the hovered setting option.
+ * Temporarily previews the hovered setting.
  */
-function previewSetting(input: HTMLInputElement, app: HTMLDivElement, lines: ChoiceLines): void {
+function previewSetting(
+    input: HTMLInputElement,
+    app: HTMLDivElement,
+    lines: ChoiceLines
+): void {
     input.checked = true;
     updateChoiceLine(input, lines);
 
@@ -97,24 +107,57 @@ function previewSetting(input: HTMLInputElement, app: HTMLDivElement, lines: Cho
 }
 
 /**
- * Restores the actually selected option after hovering.
+ * Restores the selected option after hovering.
  */
 function restoreSelectedSetting(
     name: ChoiceName,
     app: HTMLDivElement,
-    lines: ChoiceLines
+    lines: ChoiceLines,
+    selected: SelectedOptions
 ): void {
-    const value = getSettingValue(name);
-    const input = app.querySelector<HTMLInputElement>(
-        `input[name="${name}"][value="${value}"]`
-    );
+    if (!selected[name]) {
+        if (name === 'theme') restoreDefaultThemePreview(app, lines);
+        else clearSettingPreview(name, app, lines);
+        return;
+    }
 
+    const input = getSelectedInput(name, app);
     if (!input) return;
 
     input.checked = true;
     updateChoiceLine(input, lines);
 
     if (name === 'theme') updateThemePreview(gameSettings.theme, app);
+}
+
+/**
+ * Restores the default Code Vibes preview.
+ */
+function restoreDefaultThemePreview(app: HTMLDivElement, lines: ChoiceLines): void {
+    const input = app.querySelector<HTMLInputElement>(
+        'input[name="theme"][value="code-vibes"]'
+    );
+
+    if (input) previewSetting(input, app, lines);
+}
+
+/**
+ * Clears a setting preview if no option was selected.
+ */
+function clearSettingPreview(name: ChoiceName, app: HTMLDivElement, lines: ChoiceLines): void {
+    const inputs = app.querySelectorAll<HTMLInputElement>(`input[name="${name}"]`);
+    inputs.forEach(input => input.checked = false);
+    lines[name].remove();
+}
+
+/**
+ * Returns the input of the selected setting.
+ */
+function getSelectedInput(name: ChoiceName, app: HTMLDivElement): HTMLInputElement | null {
+    const value = getSettingValue(name);
+    return app.querySelector<HTMLInputElement>(
+        `input[name="${name}"][value="${value}"]`
+    );
 }
 
 /**
@@ -129,13 +172,22 @@ function getSettingValue(name: ChoiceName): string {
 /**
  * Saves the clicked setting and updates the summary.
  */
-function selectSetting(input: HTMLInputElement, app: HTMLDivElement, lines: ChoiceLines): void {
-    if (input.name === 'theme') updateSelectedTheme(input.value as Theme, app);
-    else if (input.name === 'player') updateSelectedPlayer(input.value as Player);
+function selectSetting(
+    input: HTMLInputElement,
+    app: HTMLDivElement,
+    lines: ChoiceLines,
+    selected: SelectedOptions
+): void {
+    const name = input.name as ChoiceName;
+
+    if (name === 'theme') updateSelectedTheme(input.value as Theme, app);
+    else if (name === 'player') updateSelectedPlayer(input.value as Player);
     else updateSelectedBoardSize(Number(input.value) as BoardSize);
 
+    selected[name] = true;
     updateChoiceLine(input, lines);
-    updateSettingsSummary(app);
+    updateSettingsSummary(app, selected);
+    updateStartButton(app, selected);
 }
 
 /**
@@ -201,7 +253,6 @@ function createChoiceLine(): HTMLImageElement {
  */
 function updateChoiceLine(input: HTMLInputElement, lines: ChoiceLines): void {
     const line = lines[input.name as ChoiceName];
-
     if (line) moveChoiceLine(input, line);
 }
 
@@ -216,12 +267,22 @@ function moveChoiceLine(input: HTMLInputElement, line: HTMLImageElement): void {
 /**
  * Updates the summary of the selected game settings.
  */
-function updateSettingsSummary(app: HTMLDivElement): void {
+function updateSettingsSummary(app: HTMLDivElement, selected: SelectedOptions): void {
     const theme = app.querySelector('.settings-screen__summary-theme');
     const player = app.querySelector('.settings-screen__summary-player');
     const board = app.querySelector('.settings-screen__summary-board');
 
-    if (theme) theme.textContent = THEME_LABELS[gameSettings.theme];
-    if (player) player.textContent = gameSettings.player;
-    if (board) board.textContent = `${gameSettings.boardSize} Cards`;
+    if (theme) theme.textContent = selected.theme ? THEME_LABELS[gameSettings.theme] : 'Game Theme';
+    if (player) player.textContent = selected.player ? gameSettings.player : 'Player';
+    if (board) board.textContent = selected['board-size'] ? `${gameSettings.boardSize} Cards` : 'Board Size';
+}
+
+/**
+ * Enables the start button when all settings are selected.
+ */
+function updateStartButton(app: HTMLDivElement, selected: SelectedOptions): void {
+    const button = app.querySelector<HTMLButtonElement>('.button--startGame');
+    if (!button) return;
+
+    button.disabled = !selected.theme || !selected.player || !selected['board-size'];
 }

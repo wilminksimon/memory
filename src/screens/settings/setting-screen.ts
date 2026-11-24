@@ -28,7 +28,7 @@ export function renderSettingsScreen(): string {
                     <h2><img src="${paletteIcon}" alt="Themes">Game themes</h2>
                     <div class="settings-screen__choices">
                         <label class="settings-screen__choice">
-                            <input type="radio" name="theme" value="code-vibes" checked>
+                            <input type="radio" name="theme" value="code-vibes">
                             <span>Code vibes theme</span>
                         </label>
 
@@ -53,7 +53,7 @@ export function renderSettingsScreen(): string {
                     <h2><img src="${playerIcon}" alt="Player">Choose player</h2>
                     <div class="settings-screen__choices">
                         <label class="settings-screen__choice">
-                            <input type="radio" name="player" value="blue" checked>
+                            <input type="radio" name="player" value="blue">
                             <span>Blue</span>
                         </label>
 
@@ -69,7 +69,7 @@ export function renderSettingsScreen(): string {
 
                     <div class="settings-screen__choices">
                         <label class="settings-screen__choice">
-                            <input type="radio" name="board-size" value="16" checked>
+                            <input type="radio" name="board-size" value="16">
                             <span>16 Cards</span>
                         </label>
 
@@ -93,11 +93,11 @@ export function renderSettingsScreen(): string {
 
                 <footer class="settings-screen__footer">
                     <div class="settings-screen__summary">
-                        <p class="settings-screen__summary-theme">Code Vibes</p>
+                        <p class="settings-screen__summary-theme">Game Theme</p>
                         <img src="${space}" alt="Space">
-                        <p class="settings-screen__summary-player">Blue</p>
+                        <p class="settings-screen__summary-player">Player</p>
                         <img src="${space}" alt="Space">
-                        <p class="settings-screen__summary-board">16 Cards</p>
+                        <p class="settings-screen__summary-board">Board Size</p>
                     </div>
 
                     <button class="button button--startGame" type="button">
