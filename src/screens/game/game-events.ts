@@ -7,9 +7,9 @@ import {
 import { gameSettings } from '../../data/game-settings';
 import type { GameState } from '../../types/game-types';
 
-const CARDS_PER_PAIR = 2;
-const MISMATCH_DELAY = 1000;
-const GAME_OVER_DELAY = 1000;
+const cardsPerPair = 2;
+const mismatchDelay = 1000;
+const gameOverDelay = 1000;
 
 /**
  * Stores the current state of the game events.
@@ -100,7 +100,7 @@ function openCard(card: HTMLButtonElement, gameState: GameEventState, app: HTMLD
     card.classList.add('is-flipped');
     gameState.openedCards.push(card);
 
-    if (gameState.openedCards.length === CARDS_PER_PAIR) {
+    if (gameState.openedCards.length === cardsPerPair) {
         checkSelectedCards(gameState, app);
     }
 }
@@ -132,8 +132,8 @@ function handleMatch(gameState: GameEventState, app: HTMLDivElement): void {
     updateScoreboard(app, gameState.game);
     gameState.openedCards = [];
 
-    if (gameState.matchedPairs === gameSettings.boardSize / CARDS_PER_PAIR) {
-        setTimeout(() => gameState.onGameOver(gameState.game), GAME_OVER_DELAY);
+    if (gameState.matchedPairs === gameSettings.boardSize / cardsPerPair) {
+        setTimeout(() => gameState.onGameOver(gameState.game), gameOverDelay);
     }
 }
 
@@ -144,7 +144,7 @@ function handleMatch(gameState: GameEventState, app: HTMLDivElement): void {
  */
 function handleMismatch(gameState: GameEventState, app: HTMLDivElement): void {
     gameState.isChecking = true;
-    setTimeout(() => resetSelectedCards(gameState, app), MISMATCH_DELAY);
+    setTimeout(() => resetSelectedCards(gameState, app), mismatchDelay);
 }
 
 /**

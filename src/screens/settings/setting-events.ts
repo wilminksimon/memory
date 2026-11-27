@@ -6,7 +6,7 @@ import type { Theme } from '../../types/theme-types';
 import type { Player } from '../../types/player-types';
 import type { BoardSize } from '../../types/game-types';
 
-const THEME_LABELS: Record<Theme, string> = {
+const themeLabels: Record<Theme, string> = {
     'code-vibes': 'Code Vibes',
     games: 'Games',
     'da-projects': 'DA Projects',
@@ -246,7 +246,7 @@ function updateThemePreview(theme: Theme, app: HTMLDivElement): void {
     if (!preview) return;
 
     preview.src = themePreviews[theme];
-    preview.alt = `${THEME_LABELS[theme]} Theme Preview`;
+    preview.alt = `${themeLabels[theme]} Theme Preview`;
 }
 
 /**
@@ -319,7 +319,7 @@ function updateSettingsSummary(app: HTMLDivElement, selected: SelectedOptions): 
     const player = app.querySelector('.settings-screen__summary-player');
     const board = app.querySelector('.settings-screen__summary-board');
 
-    if (theme) theme.textContent = selected.theme ? THEME_LABELS[gameSettings.theme] : 'Game Theme';
+    if (theme) theme.textContent = selected.theme ? themeLabels[gameSettings.theme] : 'Game Theme';
     if (player) player.textContent = selected.player ? gameSettings.player : 'Player';
     if (board) board.textContent = selected['board-size'] ? `${gameSettings.boardSize} Cards` : 'Board Size';
 }
