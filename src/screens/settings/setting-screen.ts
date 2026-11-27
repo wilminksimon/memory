@@ -4,7 +4,7 @@ import playerIcon from '../../assets/logos/chess_pawn.png';
 import sizeIcon from '../../assets/logos/style.png';
 import headerLine from '../../assets/logos/Line 3.png';
 import space from '../../assets/logos/space.png';
-import startButton from '../../assets/logos/smart_display.png';
+import startButton from '../../assets/logos/smart_display.svg';
 
 /**
  * Renders the settings screen with all available options.

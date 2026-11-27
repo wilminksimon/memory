@@ -1,4 +1,4 @@
-import controller from '../../assets/logos/controller.png';
+import controller from '../../assets/logos/controller.svg';
 import arrow from '../../assets/logos/arrow.svg';
 import arrowHover from '../../assets/logos/arrow-hover.svg';
 import background from '../../assets/logos/stadia_controller.svg';
