@@ -108,10 +108,14 @@ function renderGameOver(app: HTMLDivElement): void {
 function showWinnerScreen(app: HTMLDivElement, game: GameState): void {
     if (currentScreen !== 'gameOver') return;
 
-    const scoreScreen = app.querySelector('.game-over-screen--score');
+    const scoreScreen = app.querySelector<HTMLElement>('.game-over-screen--score');
     if (!scoreScreen) return;
 
-    scoreScreen.insertAdjacentHTML('beforeend', renderWinnerScreen(game));
+    app.insertAdjacentHTML('beforeend', renderWinnerScreen(game));
+    const winnerScreen = app.querySelector<HTMLElement>('.game-over-screen--winner');
+    if (!winnerScreen) return;
+
+    winnerScreen.addEventListener('animationend', () => scoreScreen.remove(), { once: true });
     initGameOverEvents(app, onBackToHome);
 }
 
